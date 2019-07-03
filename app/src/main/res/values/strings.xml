@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">premiere_soccer_league_app</string>
+    <string name="app_name">PSL Talk</string>
+    <string name="search_match">search match</string>
+    <string name="new_match">New match</string>
+    <string name="delete_match">Delete match</string>
+    <string name="add_soccer_match">Add Soccer match</string>
 </resources>
