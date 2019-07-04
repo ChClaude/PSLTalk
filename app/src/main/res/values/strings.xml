@@ -4,4 +4,6 @@
     <string name="new_match">New match</string>
     <string name="delete_match">Delete match</string>
     <string name="add_soccer_match">Add Soccer match</string>
+    <string name="teamATextView">Team A</string>
+    <string name="teamBTextView">Team B</string>
 </resources>
