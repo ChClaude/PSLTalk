@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="@string/teamATextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddToolbar" />
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="1dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,10 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="13dp"
         android:text="@string/teamBTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamAEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_linear_layout" />
 
     <EditText
         android:id="@+id/teamBEditText"
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="1dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,18 +84,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="13dp"
         android:text="Score Team A"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamBEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/teamAEditText" />
 
 
     <LinearLayout
+        android:id="@+id/spinner_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="1dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:text="Score Team A"
@@ -104,7 +105,7 @@
 
         <com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
             android:id="@+id/number_picker_vertical_icons"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="95dp"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
@@ -124,5 +125,77 @@
 
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/scoreTeamBTextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="13dp"
+        android:text="Score Team B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamBEditText" />
+
+
+    <LinearLayout
+        android:id="@+id/spinner_linear_layout_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:text="Score Team A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTeamBTextField">
+
+        <com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
+            android:id="@+id/number_picker_vertical_icons_2"
+            android:layout_width="30dp"
+            android:layout_height="95dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/number_picker_bg_color"
+            app:snp_buttonBackgroundTintSelector="@color/colorDark"
+            app:snp_buttonIconDown="@drawable/arrow_down_bold_circle_outline"
+            app:snp_buttonIconUp="@drawable/arrow_up_bold_circle_outline"
+            app:snp_maxValue="10000"
+            app:snp_minValue="0"
+            app:snp_orientation="vertical"
+            app:snp_stepSize="1"
+            app:snp_updateInterval="10"
+            app:snp_value="0"
+            app:snp_valueMarginEnd="8dp"
+            app:snp_valueMarginStart="8dp"
+            app:snp_value_text_appearance="?android:attr/textAppearanceMedium" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/pickDateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="3dp"
+        android:onClick="pickDate"
+        android:text="Pick Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_linear_layout_2" />
+
+    <EditText
+        android:id="@+id/labelEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:hint="Please enter a label"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
 
 </android.support.constraint.ConstraintLayout>
