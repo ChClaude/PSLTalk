@@ -2,11 +2,14 @@ package com.claudechrist.premiere_soccer_league_app;
 
 import android.app.DatePickerDialog;
 import java.util.Calendar;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,6 +37,14 @@ public class AddAndEditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(R.drawable.ic_baseline_close);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddAndEditActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final ScrollableNumberPicker verticalNumberPicker = (ScrollableNumberPicker) findViewById(R.id.number_picker_vertical_icons);
 
@@ -107,14 +118,8 @@ public class AddAndEditActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.search_match:
-                Toast.makeText(this, "Search match Item clicked", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.delete_match:
-                Toast.makeText(this, "Delete match Item clicked", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.new_match:
-                Toast.makeText(this, "New match Item clicked", Toast.LENGTH_SHORT).show();
+            case R.id.check_item:
+                Toast.makeText(this, "Check item clicked", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
