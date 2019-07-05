@@ -6,4 +6,5 @@
     <string name="add_soccer_match">Add Soccer match</string>
     <string name="teamATextView">Team A</string>
     <string name="teamBTextView">Team B</string>
+    <string name="title_activity_main">PSL Talk</string>
 </resources>
