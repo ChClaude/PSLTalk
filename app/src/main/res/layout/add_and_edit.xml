@@ -34,12 +34,16 @@
 
     <TextView
         android:id="@+id/teamATextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/teamATextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddToolbar" />
 
@@ -47,22 +51,30 @@
         android:id="@+id/teamAEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="1dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:ems="10"
+        android:gravity="center|center_horizontal|center_vertical"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamATextView" />
 
     <TextView
         android:id="@+id/teamBTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="@string/teamBTextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_linear_layout" />
 
@@ -70,36 +82,46 @@
         android:id="@+id/teamBEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="1dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamBTextView" />
 
     <TextView
         android:id="@+id/scoreTeamATextField"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="Score Team A"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamAEditText" />
 
 
     <LinearLayout
         android:id="@+id/spinner_linear_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="1dp"
-        android:gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
         android:text="Score Team A"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreTeamATextField">
 
@@ -109,10 +131,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             app:snp_buttonIconLeft="@drawable/ic_chevron_left_black_24dp"
             app:snp_buttonIconRight="@drawable/ic_chevron_right_black_24dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
             app:snp_buttonPaddingBottom="8dp"
             app:snp_buttonPaddingLeft="8dp"
             app:snp_buttonPaddingRight="8dp"
@@ -125,7 +147,7 @@
             app:snp_updateInterval="25"
             app:snp_value="500"
             app:snp_valueMarginEnd="30dp"
-            app:snp_valueMarginStart="30dp"/>
+            app:snp_valueMarginStart="30dp" />
 
 
     </LinearLayout>
@@ -133,26 +155,33 @@
 
     <TextView
         android:id="@+id/scoreTeamBTextField"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="Score Team B"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamBEditText" />
 
 
     <LinearLayout
         android:id="@+id/spinner_linear_layout_2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="1dp"
-        android:gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center|center_horizontal|center_vertical"
         android:orientation="horizontal"
         android:text="Score Team A"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreTeamBTextField">
 
@@ -162,10 +191,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             app:snp_buttonIconLeft="@drawable/ic_chevron_left_black_24dp"
             app:snp_buttonIconRight="@drawable/ic_chevron_right_black_24dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
             app:snp_buttonPaddingBottom="8dp"
             app:snp_buttonPaddingLeft="8dp"
             app:snp_buttonPaddingRight="8dp"
@@ -178,34 +207,41 @@
             app:snp_updateInterval="25"
             app:snp_value="500"
             app:snp_valueMarginEnd="30dp"
-            app:snp_valueMarginStart="30dp"/>
+            app:snp_valueMarginStart="30dp" />
 
 
     </LinearLayout>
 
     <Button
         android:id="@+id/pickDateBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="3dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:onClick="pickDate"
         android:text="Pick Date"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_linear_layout_2" />
+        app:layout_constraintTop_toBottomOf="@+id/labelEditText" />
 
     <EditText
         android:id="@+id/labelEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="Please enter a label"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_linear_layout_2" />
 
 </android.support.constraint.ConstraintLayout>
