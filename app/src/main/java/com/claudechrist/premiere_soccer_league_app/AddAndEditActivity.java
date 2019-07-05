@@ -26,6 +26,7 @@ public class AddAndEditActivity extends AppCompatActivity {
     private int day;
     private int month;
     private int year;
+    String date;
 
 
     @Override
@@ -46,6 +47,8 @@ public class AddAndEditActivity extends AppCompatActivity {
             }
         });
 
+        pickDateBtn = findViewById(R.id.pickDateBtn);
+
         final ScrollableNumberPicker horizontalNumberPicker = (ScrollableNumberPicker) findViewById(R.id.number_picker_horizontal_scroll);
 
         horizontalNumberPicker.setListener(new ScrollableNumberPickerListener() {
@@ -54,6 +57,8 @@ public class AddAndEditActivity extends AppCompatActivity {
                 Toast.makeText(AddAndEditActivity.this, "number picker picked at value " + value, Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
     /**
@@ -78,17 +83,19 @@ public class AddAndEditActivity extends AppCompatActivity {
         int month = c.get(Calendar.MONTH) + 1;
         int year = c.get(Calendar.YEAR);
 
+
         datePickerDialog = new DatePickerDialog(AddAndEditActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                setDay(dayOfMonth);
-                setMonth(month + 1);
-                setYear(year + 1);
+                date = dayOfMonth + "/"+ (month + 1) + "/" + year;
+                pickDateBtn.setText(date);
             }
         }, day, month, year);
 
 
         datePickerDialog.show();
+
+
 
     }
 
