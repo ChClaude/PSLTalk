@@ -164,7 +164,7 @@
             app:snp_scrollEnabled="true"
             app:snp_stepSize="1"
             app:snp_updateInterval="25"
-            app:snp_value="500"
+            app:snp_value="0"
             app:snp_valueMarginEnd="30dp"
             app:snp_valueMarginStart="30dp" />
 
@@ -221,7 +221,7 @@
             app:snp_scrollEnabled="true"
             app:snp_stepSize="1"
             app:snp_updateInterval="25"
-            app:snp_value="500"
+            app:snp_value="0"
             app:snp_valueMarginEnd="30dp"
             app:snp_valueMarginStart="30dp" />
 
