@@ -33,7 +33,7 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/teamATextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -53,10 +53,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/teamATextView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/teamBTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -76,7 +76,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/teamBTextView" />
 
     <TextView
         android:id="@+id/scoreTeamATextField"
