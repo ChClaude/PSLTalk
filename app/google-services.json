@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "332799822422",
+    "firebase_url": "https://pslapp-69379.firebaseio.com",
+    "project_id": "pslapp-69379",
+    "storage_bucket": "pslapp-69379.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332799822422:android:491f53eae7e51554",
+        "android_client_info": {
+          "package_name": "com.claudechrist.premiere_soccer_league_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332799822422-sdk7o1cf26ut1qbfku0nn0f267bam87g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.claudechrist.premiere_soccer_league_app",
+            "certificate_hash": "676c837196bf255f16a28c05e1e7d3b91882cddb"
+          }
+        },
+        {
+          "client_id": "332799822422-ed5jbhdnramkge5uuhpsn3qao8ufs83m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-bMDriBhgnbasBHDlXToXxzsjIvIq1B4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332799822422-ed5jbhdnramkge5uuhpsn3qao8ufs83m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
