@@ -46,9 +46,9 @@ public class AddAndEditActivity extends AppCompatActivity {
             }
         });
 
-        final ScrollableNumberPicker verticalNumberPicker = (ScrollableNumberPicker) findViewById(R.id.number_picker_vertical_icons);
+        final ScrollableNumberPicker horizontalNumberPicker = (ScrollableNumberPicker) findViewById(R.id.number_picker_horizontal_scroll);
 
-        verticalNumberPicker.setListener(new ScrollableNumberPickerListener() {
+        horizontalNumberPicker.setListener(new ScrollableNumberPickerListener() {
             @Override
             public void onNumberPicked(int value) {
                 Toast.makeText(AddAndEditActivity.this, "number picker picked at value " + value, Toast.LENGTH_SHORT).show();
