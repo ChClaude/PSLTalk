@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
             int labelIndex = c.getColumnIndex("label");
             int dateIndex = c.getColumnIndex("date");
 
-            c.moveToFirst();
-
             // adding the different matches to the arrayList
             while (c.moveToNext()) {
 
