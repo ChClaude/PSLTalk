@@ -6,6 +6,7 @@
         android:id="@+id/check_item"
         android:icon="@drawable/ic_check_black_24dp"
         android:title=""
+        android:onClick="validateAndInsertMatch"
         app:showAsAction="ifRoom"/>
 
 </menu>

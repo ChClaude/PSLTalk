@@ -1,8 +1,6 @@
 package com.claudechrist.premiere_soccer_league_app;
 
 import android.app.DatePickerDialog;
-import java.util.Calendar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,20 +11,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker;
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPickerListener;
 
+import java.util.Calendar;
+
 public class AddAndEditActivity extends AppCompatActivity {
 
     Calendar c;
     DatePickerDialog datePickerDialog;
-    private Button pickDateBtn;
-    private int day;
-    private int month;
-    private int year;
     String date;
+    private Button pickDateBtn;
+    private EditText teamAEditText;
+    private EditText teamBEditText;
+    private EditText labelEditText;
+    private int scoreA;
+    private int scoreB;
 
 
     @Override
@@ -47,14 +50,27 @@ public class AddAndEditActivity extends AppCompatActivity {
             }
         });
 
+
+        teamAEditText = findViewById(R.id.teamAEditText);
+        teamBEditText = findViewById(R.id.teamBEditText);
+        labelEditText = findViewById(R.id.labelEditText);
+
         pickDateBtn = findViewById(R.id.pickDateBtn);
 
-        final ScrollableNumberPicker horizontalNumberPicker = (ScrollableNumberPicker) findViewById(R.id.number_picker_horizontal_scroll);
+        final ScrollableNumberPicker horizontalNumberPicker_1 = findViewById(R.id.number_picker_horizontal_scroll_1);
+        final ScrollableNumberPicker horizontalNumberPicker_2 = findViewById(R.id.number_picker_horizontal_scroll_2);
 
-        horizontalNumberPicker.setListener(new ScrollableNumberPickerListener() {
+        horizontalNumberPicker_1.setListener(new ScrollableNumberPickerListener() {
             @Override
             public void onNumberPicked(int value) {
-                Toast.makeText(AddAndEditActivity.this, "number picker picked at value " + value, Toast.LENGTH_SHORT).show();
+                scoreA = value;
+            }
+        });
+
+        horizontalNumberPicker_2.setListener(new ScrollableNumberPickerListener() {
+            @Override
+            public void onNumberPicked(int value) {
+               scoreB = value;
             }
         });
 
@@ -87,7 +103,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(AddAndEditActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                date = dayOfMonth + "/"+ (month + 1) + "/" + year;
+                date = dayOfMonth + "/" + (month + 1) + "/" + year;
                 pickDateBtn.setText(date);
             }
         }, day, month, year);
@@ -96,43 +112,28 @@ public class AddAndEditActivity extends AppCompatActivity {
         datePickerDialog.show();
 
 
-
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
+    public void validateAndInsertMatch(MenuItem item) {
+        boolean successful = false;
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
+        if (!teamAEditText.getText().toString().equals("") && !teamBEditText.getText().toString().equals("") &&
+                !labelEditText.getText().toString().equals("") && pickDateBtn.getText().toString().contains("/")) {
 
-    public void setYear(int year) {
-        this.year = year;
-    }
+            String details = "Team A: " + teamAEditText.getText() + " Score A: " + scoreA + "\n" +
+                    "Team B: " + teamBEditText.getText() + " Score B: " + scoreB + "\n" +
+                    "Label " + labelEditText.getText() + " Date " + date;
 
-    /*// this method adds the menu to the toolbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-
-        return true;
-    }
-
-    // here we set a listener to the item created in the menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.check_item:
-                Toast.makeText(this, "Check item clicked", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            Toast.makeText(this, details, Toast.LENGTH_LONG).show();
+            successful = true;
         }
 
-
-    }*/
+        if (successful) {
+            Intent intent = new Intent(AddAndEditActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Make sure to fill in the necessary details", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }
