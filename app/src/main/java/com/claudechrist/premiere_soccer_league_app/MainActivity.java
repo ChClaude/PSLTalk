@@ -44,18 +44,18 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             soccerEventSDatabase = this.openOrCreateDatabase("Soccer Events", MODE_PRIVATE, null);
-            soccerEventSDatabase.execSQL("CREATE TABLE IF NOT EXISTS 'match' (id INT PRIMARY KEY, " +
-                    "teamA VARCHAR, sccoreA INT, teamB VARCHAR, sccoreB INT, label VARCHAR, date VARCHAR)");
+            soccerEventSDatabase.execSQL("CREATE TABLE IF NOT EXISTS 'matches' (id INTEGER PRIMARY KEY, " +
+                    "teamA VARCHAR, scoreA INT, teamB VARCHAR, scoreB INT, label VARCHAR, date VARCHAR)");
 
             // arrayList that takes in the element to display in the list
             ArrayList<String> matches = new ArrayList<>();
 
-            Cursor c = soccerEventSDatabase.rawQuery("SELECT * FROM 'match'", null);
+            Cursor c = soccerEventSDatabase.rawQuery("SELECT * FROM 'matches'", null);
             int teamAIndex = c.getColumnIndex("teamA");
-            int scoreAIndex = c.getColumnIndex("sccoreA");
+            int scoreAIndex = c.getColumnIndex("scoreA");
 
             int teamBIndex = c.getColumnIndex("teamB");
-            int scoreBIndex = c.getColumnIndex("sccoreB");
+            int scoreBIndex = c.getColumnIndex("scoreB");
 
             int labelIndex = c.getColumnIndex("label");
             int dateIndex = c.getColumnIndex("date");
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 matches.add((new Match(c.getString(teamAIndex), c.getString(teamBIndex),
                         c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex))).toString());
             }
-
-
 
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
             matchesListView.setAdapter(arrayAdapter);

@@ -124,8 +124,8 @@ public class AddAndEditActivity extends AppCompatActivity {
         if (!_teamA.equals("") && !_teamB.equals("") &&
                 !_label.equals("") && _pickDateStr.contains("/")) {
 
-            MainActivity.soccerEventSDatabase.execSQL("INSERT INTO 'match' (teamA, sccoreA, teamB, " +
-                    "sccoreB, label, date) VALUES ('" + _teamA + "'," + scoreA + ", '" + _teamB + "' ," + scoreB + ", '" +
+            MainActivity.soccerEventSDatabase.execSQL("INSERT INTO 'matches' (teamA, scoreA, teamB, " +
+                    "scoreB, label, date) VALUES ('" + _teamA + "'," + scoreA + ", '" + _teamB + "' ," + scoreB + ", '" +
                     _label + "' , '" + _pickDateStr + "')");
 
             successful = true;
