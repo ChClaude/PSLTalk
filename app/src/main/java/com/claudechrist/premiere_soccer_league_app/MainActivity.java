@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    static SQLiteDatabase soccerEventSDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         try {
-            SQLiteDatabase soccerEventSDatabase = this.openOrCreateDatabase("Soccer Events", MODE_PRIVATE, null);
+            soccerEventSDatabase = this.openOrCreateDatabase("Soccer Events", MODE_PRIVATE, null);
             soccerEventSDatabase.execSQL("CREATE TABLE IF NOT EXISTS 'match' (id INT PRIMARY KEY, teamA VARCHAR, sccoreA INT, teamB VARCHAR, sccoreB INT, label VARCHAR, date VARCHAR)");
 
             Cursor c = soccerEventSDatabase.rawQuery("SELECT * FROM 'match'", null);
