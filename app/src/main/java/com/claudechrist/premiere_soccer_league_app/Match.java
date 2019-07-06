@@ -69,11 +69,7 @@ public class Match {
     @Override
     public String toString() {
 
-        return "Match{"  +
-                "Team A: " + teamA + " Score A: " + scoreA + "\n" +
-                "Team B: " + teamB + " Score B: " + scoreB + "\n" +
-                "Label " + label + " Date " + date +
-                '}';
+        return "" + teamA + " " + scoreA + " : " + scoreB + " "+ teamB + "    " + label;
     }
 
 }

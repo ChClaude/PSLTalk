@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_main">
 
     <ListView
-        android:id="@+id/matchListView"
+        android:id="@+id/matchesListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

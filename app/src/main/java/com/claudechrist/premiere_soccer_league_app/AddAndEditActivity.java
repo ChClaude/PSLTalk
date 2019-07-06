@@ -116,15 +116,18 @@ public class AddAndEditActivity extends AppCompatActivity {
 
     public void validateAndInsertMatch(MenuItem item) {
         boolean successful = false;
+        String _teamA = teamAEditText.getText().toString();
+        String _teamB = teamBEditText.getText().toString();
+        String _label = labelEditText.getText().toString();
+        String _pickDateStr = pickDateBtn.getText().toString();
 
-        if (!teamAEditText.getText().toString().equals("") && !teamBEditText.getText().toString().equals("") &&
-                !labelEditText.getText().toString().equals("") && pickDateBtn.getText().toString().contains("/")) {
+        if (!_teamA.equals("") && !_teamB.equals("") &&
+                !_label.equals("") && _pickDateStr.contains("/")) {
 
-            String details = "Team A: " + teamAEditText.getText() + " Score A: " + scoreA + "\n" +
-                    "Team B: " + teamBEditText.getText() + " Score B: " + scoreB + "\n" +
-                    "Label " + labelEditText.getText() + " Date " + date;
+            MainActivity.soccerEventSDatabase.execSQL("INSERT INTO 'match' (teamA, sccoreA, teamB, " +
+                    "sccoreB, label, date) VALUES ('" + _teamA + "'," + scoreA + ", '" + _teamB + "' ," + scoreB + ", '" +
+                    _label + "' , '" + _pickDateStr + "')");
 
-            Toast.makeText(this, details, Toast.LENGTH_LONG).show();
             successful = true;
         }
 

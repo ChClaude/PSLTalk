@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,11 +12,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     static SQLiteDatabase soccerEventSDatabase;
+    ListView matchesListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +39,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        matchesListView = findViewById(R.id.matchesListView);
+
+
         try {
             soccerEventSDatabase = this.openOrCreateDatabase("Soccer Events", MODE_PRIVATE, null);
-            soccerEventSDatabase.execSQL("CREATE TABLE IF NOT EXISTS 'match' (id INT PRIMARY KEY, teamA VARCHAR, sccoreA INT, teamB VARCHAR, sccoreB INT, label VARCHAR, date VARCHAR)");
+            soccerEventSDatabase.execSQL("CREATE TABLE IF NOT EXISTS 'match' (id INT PRIMARY KEY, " +
+                    "teamA VARCHAR, sccoreA INT, teamB VARCHAR, sccoreB INT, label VARCHAR, date VARCHAR)");
+
+            // arrayList that takes in the element to display in the list
+            ArrayList<String> matches = new ArrayList<>();
 
             Cursor c = soccerEventSDatabase.rawQuery("SELECT * FROM 'match'", null);
-            int idIndex = c.getColumnIndex("id");
             int teamAIndex = c.getColumnIndex("teamA");
+            int scoreAIndex = c.getColumnIndex("sccoreA");
+
             int teamBIndex = c.getColumnIndex("teamB");
+            int scoreBIndex = c.getColumnIndex("sccoreB");
+
+            int labelIndex = c.getColumnIndex("label");
             int dateIndex = c.getColumnIndex("date");
 
-            Log.i("ID index", Integer.toString(idIndex));
-            Log.i("Team A index", Integer.toString(teamAIndex));
-            Log.i("Team B index", Integer.toString(teamBIndex));
-            Log.i("Date index", Integer.toString(dateIndex));
+            c.moveToFirst();
+
+            // adding the different matches to the arrayList
+            while (c.moveToNext()) {
+
+                matches.add((new Match(c.getString(teamAIndex), c.getString(teamBIndex),
+                        c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex))).toString());
+            }
+
+
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
+            matchesListView.setAdapter(arrayAdapter);
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
 
     }
 
