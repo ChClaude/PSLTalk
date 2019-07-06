@@ -70,7 +70,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         horizontalNumberPicker_2.setListener(new ScrollableNumberPickerListener() {
             @Override
             public void onNumberPicked(int value) {
-               scoreB = value;
+                scoreB = value;
             }
         });
 
@@ -95,9 +95,9 @@ public class AddAndEditActivity extends AppCompatActivity {
     public void pickDate(View view) {
         c = Calendar.getInstance();
 
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH) + 1;
-        int year = c.get(Calendar.YEAR);
+        int myDay = c.get(Calendar.DAY_OF_MONTH);
+        int myMonth = c.get(Calendar.MONTH);
+        int myYear = c.get(Calendar.YEAR);
 
 
         datePickerDialog = new DatePickerDialog(AddAndEditActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -106,7 +106,7 @@ public class AddAndEditActivity extends AppCompatActivity {
                 date = dayOfMonth + "/" + (month + 1) + "/" + year;
                 pickDateBtn.setText(date);
             }
-        }, day, month, year);
+        }, myYear, myMonth, myDay);
 
 
         datePickerDialog.show();
