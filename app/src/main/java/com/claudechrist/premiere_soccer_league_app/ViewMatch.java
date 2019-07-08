@@ -40,10 +40,15 @@ public class ViewMatch extends AppCompatActivity {
         });
 
 
-        Toast.makeText(this, "" + MainActivity.intent.getItemPosition(), Toast.LENGTH_SHORT).show();
+        int i = MainActivity.intent.getItemPosition();
 
+        Match match = MainActivity.matches.get(i);
+        String matchResult = match.getTeamA() + " " + match.getScoreA() + " : " + match.getScoreB() +
+                " " + match.getTeamB();
 
-        String scoreToolbarText = "Test";
-        toolBarScoreView.setText(scoreToolbarText);
+        dateView.setText(match.getDate());
+        scoreView.setText(matchResult);
+        labelView.setText(match.getLabel());
+        toolBarScoreView.setText(matchResult);
     }
 }

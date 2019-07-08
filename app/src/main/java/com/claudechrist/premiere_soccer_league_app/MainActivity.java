@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     static SQLiteDatabase soccerEventSDatabase;
-    static ArrayAdapter<String> arrayAdapter;
+    static ArrayList<Match> matches;
     static CustomIntent intent;
     ListView matchesListView;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     "teamA VARCHAR, scoreA INT, teamB VARCHAR, scoreB INT, label VARCHAR, date VARCHAR)");
 
             // arrayList that takes in the element to display in the list
-            ArrayList<String> matches = new ArrayList<>();
+            matches = new ArrayList<>();
 
             Cursor c = soccerEventSDatabase.rawQuery("SELECT * FROM 'matches'", null);
             int teamAIndex = c.getColumnIndex("teamA");
@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
             // adding the different matches to the arrayList
             while (c.moveToNext()) {
 
-                matches.add((new Match(c.getString(teamAIndex), c.getString(teamBIndex),
-                        c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex))).toString());
+                matches.add(new Match(c.getString(teamAIndex), c.getString(teamBIndex),
+                        c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex)));
             }
 
-            arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
+            ArrayAdapter<Match> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
             matchesListView.setAdapter(arrayAdapter);
 
 
