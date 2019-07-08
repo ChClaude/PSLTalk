@@ -37,7 +37,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_and_edit);
 
-        Toolbar toolbar = findViewById(R.id.AddToolbar);
+        Toolbar toolbar = findViewById(R.id.viewMatchToolBar);
         setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(R.drawable.ic_baseline_close);

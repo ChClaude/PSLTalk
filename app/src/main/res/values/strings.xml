@@ -16,4 +16,6 @@
     <string name="psl_sign_up">PSL SIGN UP</string>
     <string name="psl_log_in">PSL LOG IN</string>
     <string name="log_in">LOG IN</string>
+    <string name="add_comment">Add Comment</string>
+
 </resources>

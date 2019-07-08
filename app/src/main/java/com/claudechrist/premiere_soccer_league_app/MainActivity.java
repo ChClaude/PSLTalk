@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     static SQLiteDatabase soccerEventSDatabase;
+    static ArrayAdapter<String> arrayAdapter;
+    static CustomIntent intent;
     ListView matchesListView;
 
     @Override
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex))).toString());
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
+            arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
             matchesListView.setAdapter(arrayAdapter);
 
 
@@ -75,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        matchesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                intent = new CustomIntent(MainActivity.this, ViewMatch.class, position);
+                startActivity(intent);
+            }
+        });
 
     }
 

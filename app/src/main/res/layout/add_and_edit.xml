@@ -8,7 +8,7 @@
     tools:context=".AddAndEditActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/AddToolbar"
+        android:id="@+id/viewMatchToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/viewMatchToolBar"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/mycustomized_bg" />
 
@@ -59,7 +59,7 @@
         android:textColor="@color/colorLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/viewMatchToolBar" />
 
     <EditText
         android:id="@+id/teamAEditText"
