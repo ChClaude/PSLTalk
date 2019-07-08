@@ -103,7 +103,50 @@ public class AddAndEditActivity extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(AddAndEditActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                date = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+                String myMonth = "";
+
+                switch (month) {
+                    case 0:
+                        myMonth = "January";
+                        break;
+                    case 1:
+                        myMonth = "February";
+                        break;
+                case 2:
+                        myMonth = "March";
+                        break;
+                    case 3:
+                        myMonth = "April";
+                        break;
+                    case 4:
+                        myMonth = "May";
+                        break;
+                    case 5:
+                        myMonth = "June";
+                        break;
+                    case 6:
+                        myMonth = "July";
+                        break;
+                    case 7:
+                        myMonth = "August";
+                        break;
+                    case 8:
+                        myMonth = "September";
+                        break;
+                    case 9:
+                        myMonth = "October";
+                        break;
+                    case 10:
+                        myMonth = "November";
+                        break;
+                    case 11:
+                        myMonth = "December";
+                        break;
+                }
+
+
+                date = dayOfMonth + " " + myMonth + " " + year;
                 pickDateBtn.setText(date);
             }
         }, myYear, myMonth, myDay);
@@ -122,7 +165,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         String _pickDateStr = pickDateBtn.getText().toString();
 
         if (!_teamA.equals("") && !_teamB.equals("") &&
-                !_label.equals("") && _pickDateStr.contains("/")) {
+                !_label.equals("") && _pickDateStr.matches(".*\\d.*")) {
 
             MainActivity.soccerEventSDatabase.execSQL("INSERT INTO 'matches' (teamA, scoreA, teamB, " +
                     "scoreB, label, date) VALUES ('" + _teamA + "'," + scoreA + ", '" + _teamB + "' ," + scoreB + ", '" +
