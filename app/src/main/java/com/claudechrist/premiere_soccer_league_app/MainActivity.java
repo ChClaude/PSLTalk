@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,8 +19,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -29,6 +33,38 @@ public class MainActivity extends AppCompatActivity {
     static CustomIntent intent;
     ListView matchesListView;
     private FirebaseAuth mAuth;
+    private ActionMode mActionMode;
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            actionMode.getMenuInflater().inflate(R.menu.delete_match_context_menu, menu);
+            actionMode.setTitle("Delete Match");
+
+            return false;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.delete_match_action:
+                    Toast.makeText(MainActivity.this, "Delete match action clicked", Toast.LENGTH_SHORT).show();
+                    actionMode.finish();
+                    return true;
+            }
+
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode actionMode) {
+            mActionMode = null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,15 +126,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
 
-    /*@Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,8 +142,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.new_match:
                 Toast.makeText(this, "new match clicked", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.delete_match:
-                Toast.makeText(this, "delete match clicked", Toast.LENGTH_SHORT).show();
+            case R.id.log_out:
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("Logout", "User Logged out");
+                                FirebaseUtil.attachListener();
+                            }
+                        });
+                FirebaseUtil.detachListener();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -128,6 +165,35 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
+        /*MenuItem item = menu.findItem(R.id.delete_match);
+        item.getActionView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mActionMode != null)
+                    return false;
+
+                mActionMode = startSupportActionMode(mActionModeCallback);
+
+                Toast.makeText(MainActivity.this, "long click working", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });*/
+
         return true;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FirebaseUtil.detachListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FirebaseUtil.openReference(this);
+        FirebaseUtil.attachListener();
+    }
+
 }

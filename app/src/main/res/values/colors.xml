@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f4bf2e</color>
-    <color name="colorPrimaryDark">#e7bd4b</color>
-    <color name="colorAccent">#f62d51</color>
+    <color name="colorPrimary">#E4A924</color>
+    <color name="colorPrimaryDark">#252830</color>
+    <color name="colorAccent">#C92142</color>
     <color name="colorLight">#F6F6F6</color>
-    <color name="colorDark">#171719</color>
+    <color name="colorDark">#1E2127</color>
     <color name="colorSky">#90ADCB</color>
+    <color name="actionModeBackground">#434857</color>
 </resources>

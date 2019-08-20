@@ -3,24 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item android:id="@+id/search_match"
+    <item
+        android:id="@+id/search_match"
         android:icon="@drawable/ic_search_black_24dp"
         android:title=""
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/app_settings"
-        android:title="@string/settings"
-        app:showAsAction="never"/>
+    <item
+        android:id="@+id/delete_match"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:title=""
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/new_match"
+    <item
+        android:id="@+id/app_settings"
+        android:title="@string/settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/new_match"
         android:title="@string/new_match"
         app:showAsAction="never" />
 
-    <item android:id="@+id/delete_match"
-        android:title="@string/delete_match"
+    <item
+        android:id="@+id/log_out"
+        android:title="@string/log_out"
         app:showAsAction="never" />
-
-
 
 
 </menu>
