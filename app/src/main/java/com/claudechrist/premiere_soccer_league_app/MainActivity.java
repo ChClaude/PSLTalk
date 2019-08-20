@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex)));
             }
 
-            ArrayAdapter<Match> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, matches);
+            CustomAdapter arrayAdapter = new CustomAdapter(this, matches);
             matchesListView.setAdapter(arrayAdapter);
 
 
