@@ -2,6 +2,7 @@ package com.claudechrist.premiere_soccer_league_app;
 
 public class Match {
 
+    private int id;
     private String teamA;
     private String teamB;
     private int scoreA;
@@ -9,13 +10,14 @@ public class Match {
     private String label;
     private String date;
 
-    public Match(String teamA, String teamB, int scoreA, int scoreB, String label, String date) {
+    public Match(String teamA, String teamB, int scoreA, int scoreB, String label, String date, int id) {
         this.teamA = teamA;
         this.teamB = teamB;
         this.scoreA = scoreA;
         this.scoreB = scoreB;
         this.label = label;
         this.date = date;
+        this.id = id;
     }
 
     public String getTeamA() {
@@ -66,9 +68,16 @@ public class Match {
         this.date = date;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-
         return "" + teamA + " " + scoreA + " : " + scoreB + " "+ teamB + "    " + label;
     }
 

@@ -13,11 +13,13 @@ public class CustomAdapter extends ArrayAdapter<Match> {
 
     private final Context context;
     private final ArrayList<Match> matches;
+    private final ArrayList<Match> matchesFull;
 
     public CustomAdapter(Context context, ArrayList<Match> matches) {
         super(context, -1, matches);
         this.context = context;
         this.matches = matches;
+        matchesFull = new ArrayList<>(matches);
     }
 
     @Override

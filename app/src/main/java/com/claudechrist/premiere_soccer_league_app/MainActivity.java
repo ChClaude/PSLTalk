@@ -14,8 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     ListView matchesListView;
     private FirebaseAuth mAuth;
     private ActionMode mActionMode;
+    private ArrayList<Integer> selectedItems;
+
+    // action mode callback
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         matchesListView = findViewById(R.id.matchesListView);
-
+        selectedItems = new ArrayList<>();
 
         try {
             soccerEventSDatabase = this.openOrCreateDatabase("Soccer Events", MODE_PRIVATE, null);
@@ -102,17 +105,18 @@ public class MainActivity extends AppCompatActivity {
 
             int labelIndex = c.getColumnIndex("label");
             int dateIndex = c.getColumnIndex("date");
+            int iDIndex = c.getColumnIndex("id");
 
             // adding the different matches to the arrayList
             while (c.moveToNext()) {
 
                 matches.add(new Match(c.getString(teamAIndex), c.getString(teamBIndex),
-                        c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex), c.getString(dateIndex)));
+                        c.getInt(scoreAIndex), c.getInt(scoreBIndex), c.getString(labelIndex),
+                        c.getString(dateIndex), c.getInt(iDIndex)));
             }
 
             CustomAdapter arrayAdapter = new CustomAdapter(this, matches);
             matchesListView.setAdapter(arrayAdapter);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,7 +130,97 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        matchesListView.setLongClickable(true);
 
+        matchesListView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mActionMode != null) {
+                    return false;
+                }
+
+                // Start the CAB using the ActionMode.Callback defined above
+                mActionMode = startSupportActionMode(mActionModeCallback);
+                return true;
+            }
+        });
+
+        matchesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        matchesListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
+                // Here you can do something when items are selected/de-selected,
+                // such as update the title in the CAB
+                if (checked) {
+                    selectedItems.add(position);
+                } else {
+                    selectedItems.remove((Integer) position);
+                }
+
+                Toast.makeText(MainActivity.this, "Position: " + position +
+                        (checked ? " selected" : " deselected"), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
+                // Inflate the menu for the CAB
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.delete_match_context_menu, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(android.view.ActionMode mode, Menu menu) {
+                // Here you can perform updates to the CAB due to
+                // an <code><a href="/reference/android/view/ActionMode.html#invalidate()">invalidate()</a></code> request
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
+                // Respond to clicks on the actions in the CAB
+                switch (item.getItemId()) {
+                    case R.id.delete_match_action:
+                        deleteSelectedItems(selectedItems);
+                        mode.finish(); // Action picked, so close the CAB
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            @Override
+            public void onDestroyActionMode(android.view.ActionMode mode) {
+                // Here you can make any necessary updates to the activity when
+                // the CAB is removed. By default, selected items are deselected/unchecked.
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+
+            }
+        });
+
+        matchesListView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mActionMode != null)
+                    return false;
+
+                selectedItems.clear();
+                mActionMode = startSupportActionMode(mActionModeCallback);
+                return true;
+            }
+        });
+
+    }
+
+    public void deleteSelectedItems(ArrayList<Integer> positions) {
+        for (int i : positions) {
+            Match match = matches.get(i);
+            soccerEventSDatabase.execSQL("DELETE FROM 'matches' WHERE id=" + match.getId());
+        }
     }
 
     @Override
