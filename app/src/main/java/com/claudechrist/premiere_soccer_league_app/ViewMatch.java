@@ -1,6 +1,7 @@
 package com.claudechrist.premiere_soccer_league_app;
 
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -66,6 +67,8 @@ public class ViewMatch extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.edit_item) {
+            DialogFragment editMatchDialogFragment = new EditMatchDialogFragment();
+            editMatchDialogFragment.show(getSupportFragmentManager(), "Edit Match");
             Toast.makeText(this, "Edit clicked", Toast.LENGTH_SHORT).show();
             return true;
         }
