@@ -258,21 +258,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-
-        /*MenuItem item = menu.findItem(R.id.delete_match);
-        item.getActionView().setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mActionMode != null)
-                    return false;
-
-                mActionMode = startSupportActionMode(mActionModeCallback);
-
-                Toast.makeText(MainActivity.this, "long click working", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });*/
-
         return true;
     }
 

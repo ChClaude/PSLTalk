@@ -1,27 +1,32 @@
 package com.claudechrist.premiere_soccer_league_app;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ViewMatch extends AppCompatActivity {
+import java.util.Calendar;
+
+public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragment.EditDialogListener {
 
 
+    static Match match;
     TextView scoreView;
     TextView dateView;
     TextView labelView;
     TextView toolBarScoreView;
-    static Match match;
+    DialogFragment editMatchDialogFragment;
     private Button commentsButton;
 
     @Override
@@ -71,7 +76,7 @@ public class ViewMatch extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.edit_item) {
-            DialogFragment editMatchDialogFragment = new EditMatchDialogFragment();
+            editMatchDialogFragment = new EditMatchDialogFragment();
 
             editMatchDialogFragment.show(getSupportFragmentManager(), "Edit Match");
             Toast.makeText(this, "Edit clicked", Toast.LENGTH_SHORT).show();
@@ -82,4 +87,126 @@ public class ViewMatch extends AppCompatActivity {
     }
 
 
+    public void pickDate(View view) {
+        Calendar c = Calendar.getInstance();
+
+        int myDay = c.get(Calendar.DAY_OF_MONTH);
+        int myMonth = c.get(Calendar.MONTH);
+        int myYear = c.get(Calendar.YEAR);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ViewMatch.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String myMonth = "";
+
+                switch (month) {
+                    case 0:
+                        myMonth = "January";
+                        break;
+                    case 1:
+                        myMonth = "February";
+                        break;
+                    case 2:
+                        myMonth = "March";
+                        break;
+                    case 3:
+                        myMonth = "April";
+                        break;
+                    case 4:
+                        myMonth = "May";
+                        break;
+                    case 5:
+                        myMonth = "June";
+                        break;
+                    case 6:
+                        myMonth = "July";
+                        break;
+                    case 7:
+                        myMonth = "August";
+                        break;
+                    case 8:
+                        myMonth = "September";
+                        break;
+                    case 9:
+                        myMonth = "October";
+                        break;
+                    case 10:
+                        myMonth = "November";
+                        break;
+                    case 11:
+                        myMonth = "December";
+                        break;
+                }
+
+                String date = dayOfMonth + " " + myMonth + " " + year;
+                View editMatchView = editMatchDialogFragment.getView();
+                if (editMatchView != null) {
+                    Button button = editMatchView.findViewById(R.id.pick_date_btn_edit);
+                    button.setText(date);
+                }
+            }
+        }, myYear, myMonth, myDay);
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onEditDialogListener(Match match) {
+        if (validateEdDialogListener()) {
+            String sql = "UPDATE 'matches' SET teamA = '" + match.getTeamA() +
+                    "', scoreA = " + match.getScoreA() + ", teamB = '" + match.getTeamB() + "', scoreB = " + match.getScoreB()
+                    + ", label = '" + match.getLabel() + "', date = '" + match.getDate() + "' WHERE id = " + match.getId() + ";";
+            MainActivity.soccerEventSDatabase.execSQL(sql);
+
+            Toast.makeText(ViewMatch.this, "Match edited", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ViewMatch.this, "Input invalid", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public boolean validateEdDialogListener() {
+        View view = editMatchDialogFragment.getView();
+
+        EditText teamA = view.findViewById(R.id.teamA_editext_edit_box);
+        EditText scoreTeamA = view.findViewById(R.id.teamA_score_editext_edit_box);
+        EditText teamB = view.findViewById(R.id.teamB_editext_edit_box);
+        EditText scoreTeamB = view.findViewById(R.id.teamB_score_editext_edit_box);
+        EditText label = view.findViewById(R.id.label_editext_edit_box);
+        Button pickDateButton = view.findViewById(R.id.pick_date_btn_edit);
+
+
+        // validate the data
+        String teamA1 = teamA.getText().toString();
+        String teamB1 = teamB.getText().toString();
+        String label1 = label.getText().toString();
+        String date = pickDateButton.getText().toString();
+
+        if (!teamA1.equals("") && !teamB1.equals("") && !scoreTeamA.getText().toString().equals("")
+                && !scoreTeamB.getText().toString().equals("") && !label1.equals("")
+                && date.matches(".*\\d.*")) {
+
+            int scoreA = Integer.parseInt(scoreTeamA.getText().toString());
+            int scoreB = Integer.parseInt(scoreTeamB.getText().toString());
+
+            match.setTeamA(teamA1);
+            match.setTeamB(teamB1);
+            match.setScoreA(scoreA);
+            match.setScoreB(scoreB);
+            match.setLabel(label1);
+            match.setDate(date);
+
+            // update view
+            Intent i = new Intent(ViewMatch.this, ViewMatch.class);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
+
+            return true;
+        }
+
+        return false;
+    }
 }
