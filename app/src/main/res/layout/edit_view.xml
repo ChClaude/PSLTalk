@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/teamA_editext_edit_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,7 +27,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/teamA_score_editext_edit_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -35,7 +35,7 @@
             android:inputType="number" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/teamB_editext_edit_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -43,7 +43,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/teamB_score_editext_edit_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -51,7 +51,7 @@
             android:inputType="number" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/label_editext_edit_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

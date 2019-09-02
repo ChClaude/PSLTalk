@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,9 @@ public class ViewMatch extends AppCompatActivity {
     TextView dateView;
     TextView labelView;
     TextView toolBarScoreView;
+    static Match match;
     private Button commentsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,7 @@ public class ViewMatch extends AppCompatActivity {
 
         int i = MainActivity.intent.getItemPosition();
 
-        Match match = MainActivity.matches.get(i);
+        match = MainActivity.matches.get(i);
         String matchResult = match.getTeamA() + " " + match.getScoreA() + " : " + match.getScoreB() +
                 " " + match.getTeamB();
 
@@ -54,6 +57,7 @@ public class ViewMatch extends AppCompatActivity {
         scoreView.setText(matchResult);
         labelView.setText(match.getLabel());
         toolBarScoreView.setText(matchResult);
+
     }
 
     @Override
@@ -68,6 +72,7 @@ public class ViewMatch extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.edit_item) {
             DialogFragment editMatchDialogFragment = new EditMatchDialogFragment();
+
             editMatchDialogFragment.show(getSupportFragmentManager(), "Edit Match");
             Toast.makeText(this, "Edit clicked", Toast.LENGTH_SHORT).show();
             return true;

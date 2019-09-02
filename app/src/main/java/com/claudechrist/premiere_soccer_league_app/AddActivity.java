@@ -19,7 +19,7 @@ import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
 import java.util.Calendar;
 
-public class AddAndEditActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
 
     Calendar c;
     DatePickerDialog datePickerDialog;
@@ -45,7 +45,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddAndEditActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class AddAndEditActivity extends AppCompatActivity {
 
     /**
      * Add the check menu icon to the tool bar
-     * in AddAndEditActivity
+     * in AddActivity
      *
      * @param menu
      * @return
@@ -100,7 +100,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         int myYear = c.get(Calendar.YEAR);
 
 
-        datePickerDialog = new DatePickerDialog(AddAndEditActivity.this, new DatePickerDialog.OnDateSetListener() {
+        datePickerDialog = new DatePickerDialog(AddActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -154,7 +154,6 @@ public class AddAndEditActivity extends AppCompatActivity {
 
         datePickerDialog.show();
 
-
     }
 
     public void validateAndInsertMatch(MenuItem item) {
@@ -175,7 +174,7 @@ public class AddAndEditActivity extends AppCompatActivity {
         }
 
         if (successful) {
-            Intent intent = new Intent(AddAndEditActivity.this, MainActivity.class);
+            Intent intent = new Intent(AddActivity.this, MainActivity.class);
             startActivity(intent);
         } else {
             Toast.makeText(this, "Make sure to fill in the necessary details", Toast.LENGTH_SHORT).show();
