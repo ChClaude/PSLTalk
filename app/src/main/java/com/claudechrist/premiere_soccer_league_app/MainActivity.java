@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        FirebaseUtil.openReference(this);
+        FirebaseUtil.openReference("match_comments", this);
         FirebaseUtil.attachListener();
     }
 

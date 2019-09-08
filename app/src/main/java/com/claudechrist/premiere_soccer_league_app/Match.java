@@ -20,6 +20,9 @@ public class Match {
         this.id = id;
     }
 
+    public Match() {
+    }
+
     public String getTeamA() {
         return teamA;
     }
@@ -68,17 +71,17 @@ public class Match {
         this.date = date;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "" + teamA + " " + scoreA + " : " + scoreB + " "+ teamB + "    " + label;
+        return "" + teamA + " " + scoreA + " : " + scoreB + " " + teamB + "    " + label;
     }
 
 }

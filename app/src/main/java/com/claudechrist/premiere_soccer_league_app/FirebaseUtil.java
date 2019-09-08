@@ -9,13 +9,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FirebaseUtil {
-    public static FirebaseUtil firebaseUtil;
+    public static FirebaseDatabase mFirebaseDatabase;
+    public static DatabaseReference mDatabaseReference;
     public static FirebaseAuth mFirebaseAuth;
+    public static FirebaseUtil firebaseUtil;
     public static FirebaseAuth.AuthStateListener mAuthListener;
     private static int RC_SIGN_IN = 123;
     private static Activity caller;
@@ -24,11 +25,12 @@ public class FirebaseUtil {
     private FirebaseUtil() {
     }
 
-    public static void openReference(final Activity callerActivity) {
+    public static void openReference(String ref, final Activity callerActivity) {
         if (firebaseUtil == null) {
             firebaseUtil = new FirebaseUtil();
             mFirebaseAuth = FirebaseAuth.getInstance();
             caller = callerActivity;
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
 
             mAuthListener = new FirebaseAuth.AuthStateListener() {
                 @Override
@@ -39,6 +41,8 @@ public class FirebaseUtil {
                     Toast.makeText(callerActivity.getBaseContext(), "Welcome back!", Toast.LENGTH_SHORT).show();
                 }
             };
+
+            mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
         }
 
     }

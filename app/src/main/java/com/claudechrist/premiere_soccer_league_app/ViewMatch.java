@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,24 +18,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 
 public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragment.EditDialogListener {
-
 
     static Match match;
     TextView scoreView;
     TextView dateView;
     TextView labelView;
     TextView toolBarScoreView;
+    EditText inputCommentEditText;
     DialogFragment editMatchDialogFragment;
-    private Button commentsButton;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    MatchComment matchComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_match);
 
+        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+        mDatabaseReference = FirebaseUtil.mDatabaseReference;
+
+        inputCommentEditText = findViewById(R.id.editText);
         scoreView = findViewById(R.id.scoreTextView);
         dateView = findViewById(R.id.dateTextView);
         labelView = findViewById(R.id.labelTextView);
@@ -51,9 +62,14 @@ public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragm
             }
         });
 
+        Intent intent = getIntent();
+        MatchComment matchComment = (MatchComment) intent.getSerializableExtra("match_comment");
+        if (matchComment == null)
+            matchComment = new MatchComment();
+
+        this.matchComment = matchComment;
 
         int i = MainActivity.intent.getItemPosition();
-
         match = MainActivity.matches.get(i);
         String matchResult = match.getTeamA() + " " + match.getScoreA() + " : " + match.getScoreB() +
                 " " + match.getTeamB();
@@ -64,6 +80,40 @@ public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragm
         toolBarScoreView.setText(matchResult);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FirebaseUtil.openReference("match_comments", this);
+        RecyclerView matchComments = findViewById(R.id.rv_comments);
+        final CommentsAdapter adapter = new CommentsAdapter();
+        matchComments.setAdapter(adapter);
+        LinearLayoutManager commentsLayoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+
+        matchComments.setLayoutManager(commentsLayoutManager);
+        FirebaseUtil.attachListener();
+    }
+
+    public void addMatchComment(View view) {
+        String input = inputCommentEditText.getText().toString();
+        MatchComment matchC;
+        if (!input.equals("")) {
+            matchC = new MatchComment(match, input);
+            mDatabaseReference.push().setValue(matchC);
+            matchComment = matchC;
+            inputCommentEditText.setText("");
+        } else {
+            Toast.makeText(this, "Please type in your comment", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public  void deleteMatchComment(View view) {
+        mDatabaseReference.child(matchComment.getId()).removeValue();
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
