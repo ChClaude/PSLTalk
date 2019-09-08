@@ -35,7 +35,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_and_edit);
+        setContentView(R.layout.add_match);
 
         Toolbar toolbar = findViewById(R.id.viewMatchToolBar);
         setSupportActionBar(toolbar);
