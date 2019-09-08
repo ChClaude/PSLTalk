@@ -2,15 +2,16 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_layout_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="102dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginLeft="@dimen/margin_standard"
+        android:id="@+id/ball_image_view"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,18 +27,18 @@
         android:layout_marginTop="@dimen/margin_standard"
         android:text="TextView"
         android:textSize="@dimen/text_large"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ball_image_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/match_label_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginLeft="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_standard"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ball_image_view"
         app:layout_constraintTop_toBottomOf="@+id/match_score_textview" />
 
     <TextView
@@ -49,5 +50,17 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/match_label_textview" />
+
+    <ImageView
+        android:id="@+id/ic_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/match_label_textview"
+        app:layout_constraintTop_toBottomOf="@+id/match_score_textview"
+        app:srcCompat="@drawable/ic_check_circle" />
 
 </android.support.constraint.ConstraintLayout>

@@ -32,17 +32,16 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<Match> matches;
     static CustomIntent intent;
     ListView matchesListView;
+    CustomAdapter arrayAdapter;
     private FirebaseAuth mAuth;
     private ActionMode mActionMode;
     private ArrayList<Integer> selectedItems;
-
     // action mode callback
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             actionMode.getMenuInflater().inflate(R.menu.delete_match_context_menu, menu);
             actionMode.setTitle("Delete Match");
-
             return false;
         }
 
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                     actionMode.finish();
                     return true;
             }
-
             return false;
         }
 
@@ -99,10 +97,8 @@ public class MainActivity extends AppCompatActivity {
             Cursor c = soccerEventSDatabase.rawQuery("SELECT * FROM 'matches'", null);
             int teamAIndex = c.getColumnIndex("teamA");
             int scoreAIndex = c.getColumnIndex("scoreA");
-
             int teamBIndex = c.getColumnIndex("teamB");
             int scoreBIndex = c.getColumnIndex("scoreB");
-
             int labelIndex = c.getColumnIndex("label");
             int dateIndex = c.getColumnIndex("date");
             int iDIndex = c.getColumnIndex("id");
@@ -115,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         c.getString(dateIndex), c.getInt(iDIndex)));
             }
 
-            CustomAdapter arrayAdapter = new CustomAdapter(this, matches);
+            arrayAdapter = new CustomAdapter(this, matches);
             matchesListView.setAdapter(arrayAdapter);
 
         } catch (Exception e) {
@@ -131,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         matchesListView.setLongClickable(true);
-
         matchesListView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -156,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     selectedItems.remove((Integer) position);
                 }
+
+//                arrayAdapter.getView(position, convertView, );
+                arrayAdapter.setItemSelectedState(checked);
 
                 Toast.makeText(MainActivity.this, "Position: " + position +
                         (checked ? " selected" : " deselected"), Toast.LENGTH_SHORT).show();

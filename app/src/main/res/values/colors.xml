@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#d17511</color>
     <color name="colorAccent">#C92142</color>
     <color name="colorLight">#F6F6F6</color>
-    <color name="colorDark">#1E2127</color>
+    <color name="colorDark">#C3C3C3</color>
     <color name="colorSky">#90ADCB</color>
     <color name="actionModeBackground">#434857</color>
 </resources>
