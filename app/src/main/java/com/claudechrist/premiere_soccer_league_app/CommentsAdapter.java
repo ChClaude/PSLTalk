@@ -51,7 +51,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                if (mcComment != null) {
+                    int index = matchComments.indexOf(mcComment);
+                    Log.i("TAG", index + " has been removed at that index");
+                    matchComments.remove(index);
+                    notifyItemRemoved(index);
+                }
             }
 
             @Override
