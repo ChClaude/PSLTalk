@@ -81,12 +81,13 @@ public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragm
 
     }
 
+    RecyclerView matchComments;
     @Override
     protected void onResume() {
         super.onResume();
 
         FirebaseUtil.openReference("match_comments", this);
-        RecyclerView matchComments = findViewById(R.id.rv_comments);
+        matchComments = findViewById(R.id.rv_comments);
         final CommentsAdapter adapter = new CommentsAdapter();
         matchComments.setAdapter(adapter);
         LinearLayoutManager commentsLayoutManager = new LinearLayoutManager(this,
@@ -102,7 +103,7 @@ public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragm
         if (!input.equals("")) {
             matchC = new MatchComment(match, input);
             mDatabaseReference.push().setValue(matchC);
-            matchComment = matchC;
+//            matchComment = matchC;
             inputCommentEditText.setText("");
         } else {
             Toast.makeText(this, "Please type in your comment", Toast.LENGTH_SHORT).show();
@@ -111,6 +112,7 @@ public class ViewMatch extends AppCompatActivity implements EditMatchDialogFragm
 
     public  void deleteMatchComment(View view) {
         mDatabaseReference.child(matchComment.getId()).removeValue();
+//        matchComments.getAdapter().;
     }
 
 
